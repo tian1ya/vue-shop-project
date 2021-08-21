@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-      App 根组件
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <!-- 路由占位符 -->
+    <router-view></router-view>
   </div>
 </template>
 
