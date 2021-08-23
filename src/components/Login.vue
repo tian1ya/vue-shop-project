@@ -31,8 +31,8 @@ export default {
     return {
       // 登录表单数据对象
       loginForm: {
-        username: 's',
-        password: '123'
+        username: 'admin',
+        password: '123456'
       },
       // 表单验证规则
       loginFormRules: {
@@ -59,10 +59,17 @@ export default {
         if (!valid) return
         const { data: res } = await this.$http.post('login', this.loginForm)
         if (res.meta.status !== 200) {
-          console.log('登录失败')
-          return
+          return this.$message({
+            message: '登录失败!',
+            type: 'error'
+          })
         }
-        console.log('登录成功')
+
+        this.$message.success('登录成功')
+        window.sessionStorage.setItem('token', res.data.token)
+        console.log(res)
+        // 编程式导航跳转到后台主页，路由地址 /home
+        this.$router.push('home')
       })
     }
   }
@@ -107,7 +114,7 @@ export default {
       position: absolute;
       left: 50%;
       transform: translate(-50%, -50%);
-       background-color: #eee;
+      background-color: #eee;
       img {
         width: 100%;
         height: 100%;
