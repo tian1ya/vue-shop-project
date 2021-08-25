@@ -17,13 +17,19 @@
           :unique-opened='true'
           :collapse='isCollapse'
           :collapse-transition='false'
-        ><!--active-text-color： 点击之后高亮, unique-opened: 每次只展开一个页面 -->
+          :router="true"
+          :default-active='activePath'
+        >
+        <!--
+          router: 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转
+          active-text-color： 点击之后高亮, unique-opened: 每次只展开一个页面
+          -->
           <el-submenu :index='item.id.toString()' v-for="item in menuList" :key="item.id">
             <template slot="title">
               <i :class = 'iconsObj[item.id.toString()]'></i>
               <span>{{ item.authName }}</span>
             </template>
-            <el-menu-item :index="ele.id.toString()" v-for="ele in item.children" :key="ele.id">
+            <el-menu-item :index="'/' + ele.path" v-for="ele in item.children" :key="ele.id" @click="saveNewState('/' + ele.path)">
                <template slot="title">
                 <i class ="el-icon-menu"></i>
                 <span>{{ ele.authName }}</span>
@@ -32,7 +38,9 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -42,6 +50,7 @@ export default {
   // 生命周期函数，在加载这个组件的时候就会去执行该方法
   created () {
     this.getMenuList()
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
     logout () {
@@ -56,6 +65,10 @@ export default {
     },
     toggleCollapse () {
       this.isCollapse = !this.isCollapse
+    },
+    saveNewState (activePath) {
+      window.sessionStorage.setItem('activePath', activePath)
+      this.activePath = activePath
     }
   },
   data () {
@@ -69,7 +82,8 @@ export default {
         102: 'iconfont icon-danju',
         145: 'iconfont icon-baobiao'
       },
-      isCollapse: false
+      isCollapse: false,
+      activePath: ''
     }
   }
 }

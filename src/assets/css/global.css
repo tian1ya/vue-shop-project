@@ -3,3 +3,23 @@ html,body,#app {
   margin: 0%;
   padding: 0%;
 }
+.el-breadcrumb {
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+.el-card {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15)!important;
+  /* 
+    h-shadow： 必需。水平阴影的位置。允许负值。
+    v-shadow： 必需。垂直阴影的位置。允许负值。
+    blur ： 可选。模糊距离。
+    spread ： 可选。阴影的尺寸。
+    color ： 可选。阴影的颜色。请参阅 CSS 颜色值。
+    inset; ： 可选。将外部阴影 (outset) 改为内部阴影。
+    important 覆盖默认的卡片引用样式 */
+}
+.el-table {
+  font-size: 12px;
+  margin-top: 15px;
+}
+
