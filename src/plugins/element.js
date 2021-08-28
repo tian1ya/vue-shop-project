@@ -23,7 +23,8 @@ import {
   Switch,
   Tooltip,
   Pagination,
-  Dialog
+  Dialog,
+  MessageBox
 } from 'element-ui'
 
 Vue.use(Button)
@@ -71,3 +72,4 @@ Vue.prototype.$message.error = function (msg) {
     type: 'error'
   })
 }
+Vue.prototype.$confirm = MessageBox.confirm
