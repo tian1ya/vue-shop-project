@@ -21,7 +21,9 @@ import {
   Table,
   TableColumn,
   Switch,
-  Tooltip
+  Tooltip,
+  Pagination,
+  Dialog
 } from 'element-ui'
 
 Vue.use(Button)
@@ -45,5 +47,27 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Switch)
 Vue.use(Tooltip)
+Vue.use(Pagination)
+Vue.use(Dialog)
+// Vue.prototype.$message = Message
 // 和上面的不同，这里需要做全局挂在到 Vue 的全局对象上
-Vue.prototype.$message = Message
+Vue.prototype.$message = function (msg) {
+  return Message({
+    message: msg,
+    duration: 3000
+  })
+}
+Vue.prototype.$message.success = function (msg) {
+  return Message({
+    message: msg,
+    duration: 500,
+    type: 'success'
+  })
+}
+Vue.prototype.$message.error = function (msg) {
+  return Message({
+    message: msg,
+    duration: 500,
+    type: 'error'
+  })
+}
