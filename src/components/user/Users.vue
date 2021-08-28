@@ -253,7 +253,8 @@ export default {
       })
     },
     async removeUserById (userInfo) {
-      const configResult = await this.$confirm('永久删除该用户, 是否继续?', '提示', {
+      //  在 element.js MessageBox.confirm 定义函数
+      const configResult = await this.$confirm('永久删除该用户, 是否继续?', '删除', {
         confirmButtonText: '删除',
         cancelButtonText: '取消', // 取消会抛出异常，给 catch 处理
         type: 'warning'
