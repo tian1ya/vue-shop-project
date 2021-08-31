@@ -26,4 +26,7 @@ html,body,#app {
 .el-pagination{
   margin-top: 15px;
 }
-
+/* 不设置，无法出现第二/三级以后的内容 */
+.el-cascader-menu {
+  height: 300px;
+}
