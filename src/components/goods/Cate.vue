@@ -65,6 +65,7 @@
       title="添加分类"
       :visible="addCateDialogVisivale"
       width="40%"
+      @closed="addCateDialogClosed"
     >
     <!-- :before-close="handleClose" -->
       <el-form 
@@ -88,7 +89,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addCateDialogVisivale=false">取消</el-button>
-        <el-button type="primary" @click="addCateDialogVisivale=false">确定</el-button>
+        <el-button type="primary" @click="addCate">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -152,8 +153,27 @@ export default {
     this.getCates()
   },
   methods: {
+    addCateDialogClosed () {
+      this.$refs.addCatFormRef.resetFields()
+      this.addCateKeysBody = []
+      this.addCateForm.cat_id=0
+      this.addCateForm.cat_level=0
+
+    },
+    addCate () {
+      this.$message.success("发送请求，添加分类成功")
+      this.addCateDialogVisivale=false
+    },
     handleChange () {
       console.log(this.addCateKeysBody)
+      if (this.addCateKeysBody.length > 0) {
+        // 选中父级分类
+        this.addCateForm.cat_id = this.addCateKeysBody[this.addCateKeysBody.length-1]
+        this.addCateForm.cat_level = this.addCateKeysBody.length
+      } else {
+        this.addCateForm.cat_id = 0
+        this.addCateForm.cat_level = 0
+      }
     },
     async getParentCateList () {
       const { data: res } = await this.$http.get('categories', {
