@@ -24,6 +24,18 @@ Vue.config.productionTip = false
 
 Vue.component('tree-table', TreeTable)
 
+// 全局过滤器
+Vue.filter('dataFormater', function(originalVal) {
+  const dt = new Date(originalVal)
+  const year = dt.getFullYear()
+  const month = (dt.getMonth() + 1 + '').padStart(2, '0')
+  const day = (dt.getDate() + '').padStart(2,'0')
+  const hh = (dt.getHours() + '').padStart(2,'0')
+  const mm = (dt.getMinutes() + '').padStart(2,'0')
+  const ss = (dt.getSeconds() + '').padStart(2,'0')
+
+  return `${year}-${month}-${day} ${hh}:${mm}:${ss}`
+})
 new Vue({
   router,
   store,
