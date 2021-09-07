@@ -12,6 +12,15 @@ import './assets/css/global.css'
 // 导入字体图标
 import './assets/fonts/iconfont.css'
 
+import VueQuillEditor from 'vue-quill-editor'
+
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
+// 挂在为全局可用
+Vue.use(VueQuillEditor, /* { default global options } */)
+
+
 // 配置请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 axios.interceptors.request.use(config => {

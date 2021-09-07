@@ -30,7 +30,7 @@ import {
   Select,
   Option,
   Cascader,Alert,Tabs,TabPane,
-  Steps,Step
+  Steps,Step,CheckboxGroup, Checkbox,Upload
 } from 'element-ui'
 
 Vue.use(Button)
@@ -66,6 +66,9 @@ Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Steps)
 Vue.use(Step)
+Vue.use(CheckboxGroup)
+Vue.use(Checkbox)
+Vue.use(Upload)
 // Vue.prototype.$message = Message
 // 和上面的不同，这里需要做全局挂在到 Vue 的全局对象上
 Vue.prototype.$message = function (msg) {
