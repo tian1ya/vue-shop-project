@@ -103,13 +103,15 @@
       </el-form>
     </el-card>
 
-    <el-dialog title="图片预览" :visible.sync="previewPathVisible" width="50%" >
-      <img :src="previewPath" alt="" class="preview">
+    <el-dialog title="图片预览" :visible.sync="previewPathVisible" width="50%">
+      <img :src="previewPath" alt class="preview" />
     </el-dialog>
   </div>
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
   created() {
     this.getCateList();
@@ -179,8 +181,8 @@ export default {
     handlePreview(file) {
       console.log(file);
       this.previewPath = file.response.data.url;
-      console.log(this.previewPath)
-      this.previewPathVisible = true
+      console.log(this.previewPath);
+      this.previewPathVisible = true;
     },
     handleRemove(file, fileList) {
       // file 将要被移除的图片信息
@@ -196,11 +198,17 @@ export default {
       let picInfo = { pic: response.data.tmp_path };
       this.addForm.pics.push(picInfo);
     },
-    addGood () {
-      console.log(this.addForm)
-      // this.$refs.ruleFormRef.validate(valid => {
-
-      // })
+    addGood() {
+      console.log(this.addForm);
+      this.$refs.ruleFormRef.validate(valid => {
+        let newAddForm = _.cloneDeep(this.addForm)
+        console.log(newAddForm)
+        
+        if (valid) {
+          return this.$message.success("商品创建成功");
+        }
+        return this.$message.error("商品创建失败");
+      });
     }
   },
   data() {
@@ -223,7 +231,7 @@ export default {
         goods_weight: 0,
         goods_number: 0,
         pics: [],
-        goods_introduce:''
+        goods_introduce: ""
       },
       addRules: {
         goods_name: [
